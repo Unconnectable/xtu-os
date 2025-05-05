@@ -1,0 +1,18 @@
+# 忽略 out/ 目录下的所有文件（即编译生成的可执行文件）
+/out/*
+
+# 或者更严格地忽略 lab1~lab4 中 out/ 下的所有文件
+/lab1/out/*
+/lab2/out/*
+/lab3/out/*
+/lab4/out/*
+
+# 忽略常见的临时编译输出
+a.out
+*.out
+*.o
+*.obj
+*.exe
+
+# 忽略 Windows 浏览器下载产生的附加信息文件（可选）
+*.md:Zone.Identifier
