@@ -2,10 +2,17 @@
 /out/*
 
 # 或者更严格地忽略 lab1~lab4 中 out/ 下的所有文件
-/lab1/out/*
-/lab2/out/*
-/lab3/out/*
-/lab4/out/*
+build/
+
+build
+.build_debug/*
+.build_release/*
+distribute/*
+*.testbin
+*.bin
+cmake_build
+.cmake_build
+cmake-build-*
 
 # 忽略常见的临时编译输出
 a.out
