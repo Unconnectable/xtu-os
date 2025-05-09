@@ -6,48 +6,9 @@
 
 `fork()`来自`<unistd.h>`头文件
 
-```cpp
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-
-int main() {
-
-  pid_t pid = fork();
-  if (pid < 0) {
-    perror("Fork fail");
-    return 1;
-  } else if (pid == 0) {
-    printf("b\n");
-    printf("c\n");
-  } else {
-    printf("a\n");
-  }
-}
-```
-
 ## (2)
 
-```cpp
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-
-int main() {
-
-  pid_t pid = fork();
-  if (pid < 0) {
-    perror("Fork fail");
-    return 1;
-  } else if (pid == 0) {
-    printf("b\n");
-    printf("c\n");
-  } else {
-    printf("Father process\n");
-    printf("pid=%d\n", getpid());
-  }
-}
-```
+> ### 没啥好说的
 
 ## (3)
 
@@ -194,13 +155,13 @@ signal(SIGINT, SIG_IGN);
 signal(SIGQUIT, SIG_IGN);
 ```
 
-![1.3(2)](<../assets/1.3(2).png>)
+![1.3(2)](</assets/1.3(2).png>)
 
 **让当前进程忽略 `SIGINT` 和 `SIGQUIT` 信号,防止程序被用户中断(如按下 Ctrl + C 或 Ctrl + \)**
 
 ## (4)
 
-#### **一个管道可能会竞争于是建议还是两个**
+#### **一个管道可能会竞争,建议还是两个**
 
 ```c
 
