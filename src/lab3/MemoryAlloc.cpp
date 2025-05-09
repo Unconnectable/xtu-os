@@ -41,7 +41,7 @@ bool MemoryManager::allocate(size_t JobId, size_t Size) {
 bool MemoryManager::free(size_t JobId) {
   // 回收某个块
   for (auto it = blocks.begin(); it != blocks.end(); ++it) {
-    if (!it->is_free && *it->job_id == JobId) {
+    if (!it->is_free && it->job_id.has_value() && *it->job_id == JobId) {
       // 回收
       it->is_free = true;
       it->job_id = std::nullopt;
@@ -52,8 +52,8 @@ bool MemoryManager::free(size_t JobId) {
       auto prev_ = std::prev(it);
       if (prev_ != blocks.end() && prev_->is_free && prev_->start + prev_->size == it->start) {
         prev_->size += it->size;
-        blocks.erase(it);
-        it = prev_;
+        it = blocks.erase(it);
+        //it = prev_;
       }
       auto next_ = std::next(it);
       if (next_->is_free && next_ != blocks.end() && it->start + it->size == next_->start) {
@@ -73,3 +73,5 @@ void MemoryManager::print() {
   }
   std::cout << std::endl;
 }
+
+std::list<MemoryBlock> MemoryManager::getBlocks() { return blocks; }

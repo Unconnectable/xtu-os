@@ -62,7 +62,7 @@ int main() {
     while (1)
       pause();
   }
-  //注册父进程的信号处理函数，捕捉 SIGINT
+  //注册父进程的信号处理函数,捕捉 SIGINT
 
   printf("Parent PID=%d created Child1 PID=%d"
          "and Child2 PID=%d.\n",

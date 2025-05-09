@@ -11,7 +11,7 @@ class MemoryBlock {
   bool is_free;
   std::optional<size_t> job_id;
   MemoryBlock(size_t s, size_t sz, bool free, std::optional<size_t> id);
-  void print() {}
+  void print();
 };
 
 class MemoryManager {
@@ -19,10 +19,11 @@ class MemoryManager {
   std::list<MemoryBlock> blocks;
 
  public:
-  MemoryManager() {}
-  bool allocate(size_t JobId, size_t Size) {}
+  MemoryManager();
+  bool allocate(size_t JobId, size_t Size);
 
-  bool free(size_t JobId) {}
+  bool free(size_t JobId);
 
-  void print() {}
+  void print();
+  std::list<MemoryBlock> getBlocks();
 };

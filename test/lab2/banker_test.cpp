@@ -8,7 +8,7 @@ using std::endl;
 using std::vector;
 using std::string;
 
-// 工具函数：将 vector<int> 转换为字符串表示如 "P0 P1"
+// 工具函数:将 vector<int> 转换为字符串表示如 "P0 P1"
 string vecToString(const vector<int>& v) {
     string res;
     for (size_t i = 0; i < v.size(); ++i) {

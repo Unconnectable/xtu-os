@@ -51,14 +51,14 @@ int main() {
 
 ## (3)
 
-**目标**：程序创建一个父进程和两个子进程。父进程等待用户按 Ctrl+C（触发 SIGINT 信号），然后向两个子进程发送 SIGUSR1 信号，子进程接收信号后打印信息并退出，父进程等待子进程结束后再退出。
+**目标**:程序创建一个父进程和两个子进程.父进程等待用户按 Ctrl+C(触发 SIGINT 信号),然后向两个子进程发送 SIGUSR1 信号,子进程接收信号后打印信息并退出,父进程等待子进程结束后再退出.
 
 关键
 
-- **进程创建**：使用 fork()创建子进程。
-- **信号处理**：使用 signal()注册信号处理函数，处理 SIGINT（父进程）和 SIGUSR1（子进程）。
-- **信号发送**：父进程使用 kill()向子进程发送信号。
-- **进程同步**：使用 pause()让进程等待信号，wait()避免僵尸进程。
+- **进程创建**:使用 fork()创建子进程.
+- **信号处理**:使用 signal()注册信号处理函数,处理 SIGINT(父进程)和 SIGUSR1(子进程).
+- **信号发送**:父进程使用 kill()向子进程发送信号.
+- **进程同步**:使用 pause()让进程等待信号,wait()避免僵尸进程.
 
 ```c
 #include <signal.h>
@@ -121,7 +121,7 @@ int main() {
     while (1)
       pause();
   }
-  //注册父进程的信号处理函数，捕捉 SIGINT
+  //注册父进程的信号处理函数,捕捉 SIGINT
   signal(SIGINT, handle_parent);
 
   printf("Parent PID=%d created Child1 PID=%d"
@@ -145,13 +145,13 @@ int main() {
 
 放在前后有两种观点:
 
-1.**父进程必须处理 SIGINT:** 父进程需要接收 SIGINT 信号（由 Ctrl+C 触发）并采取行动，例如杀死子进程。如果在 fork() 之后才注册，那么父进程可能在 Ctrl+C 到来之前就已经创建了子进程，而此时子进程的 SIGINT 处理行为是不确定的。
+1.**父进程必须处理 SIGINT:** 父进程需要接收 SIGINT 信号(由 Ctrl+C 触发)并采取行动,例如杀死子进程.如果在 fork() 之后才注册,那么父进程可能在 Ctrl+C 到来之前就已经创建了子进程,而此时子进程的 SIGINT 处理行为是不确定的.
 
-2.因为 `fork()` 会复制当前进程的所有内容（包括信号处理方式），如果你在 `fork()` 之前设置信号处理函数：
+2.因为 `fork()` 会复制当前进程的所有内容(包括信号处理方式),如果你在 `fork()` 之前设置信号处理函数:
 
-- 子进程也会继承这个设置；
-- 如果你不希望子进程也响应 `SIGINT`，那就会出问题；
-- 比如：按下 `Ctrl + C` 后多个进程都进入信号处理函数 → 输出混乱或程序崩溃。
+- 子进程也会继承这个设置;
+- 如果你不希望子进程也响应 `SIGINT`,那就会出问题;
+- 比如:按下 `Ctrl + C` 后多个进程都进入信号处理函数 → 输出混乱或程序崩溃.
 
 ### 对于不同的位置没有在自线程忽略`ctrl+V`的输出如下,包括且不仅限制于
 
@@ -196,7 +196,7 @@ signal(SIGQUIT, SIG_IGN);
 
 ![1.3(2)](<../assets/1.3(2).png>)
 
-**让当前进程忽略 `SIGINT` 和 `SIGQUIT` 信号，防止程序被用户中断（如按下 Ctrl + C 或 Ctrl + \）**
+**让当前进程忽略 `SIGINT` 和 `SIGQUIT` 信号,防止程序被用户中断(如按下 Ctrl + C 或 Ctrl + \)**
 
 ## (4)
 
@@ -272,7 +272,7 @@ int main() {
 #include <sys/wait.h>
 #include <unistd.h>
 
-// 全局变量，存储子进程的 PID
+// 全局变量,存储子进程的 PID
 pid_t child1_pid, child2_pid;
 
 // 子进程 1 的信号处理函数
@@ -310,7 +310,7 @@ void sig_handler_parent(int signo) {
 }
 
 int main() {
-  // 注册父进程的信号处理函数，捕捉 SIGINT
+  // 注册父进程的信号处理函数,捕捉 SIGINT
   if (signal(SIGINT, sig_handler_parent) == SIG_ERR) {
     perror("signal (SIGINT)");
     exit(1);
@@ -329,7 +329,7 @@ int main() {
       perror("signal (SIGINT - child1)");
       exit(1);
     }
-    // 注册子进程 1 的信号处理函数，捕捉 SIGUSR1
+    // 注册子进程 1 的信号处理函数,捕捉 SIGUSR1
     if (signal(SIGUSR1, sig_handler_child1) == SIG_ERR) {
       perror("signal (SIGUSR1 - child1)");
       exit(1);
@@ -352,12 +352,12 @@ int main() {
   }
 
   if (child2_pid == 0) { // 子进程 2
-    // 忽略 SIGINT，避免子进程处理 Ctrl+C
+    // 忽略 SIGINT,避免子进程处理 Ctrl+C
     if (signal(SIGINT, SIG_IGN) == SIG_ERR) {
       perror("signal (SIGINT - child2)");
       exit(1);
     }
-    // 注册子进程 2 的信号处理函数，捕捉 SIGUSR1
+    // 注册子进程 2 的信号处理函数,捕捉 SIGUSR1
     if (signal(SIGUSR1, sig_handler_child2) == SIG_ERR) {
       perror("signal (SIGUSR1 - child2)");
       exit(1);
@@ -421,7 +421,7 @@ int main() {
   }
 
   // 父进程
-  close(fd[1]); // 父进程只读，关闭写端
+  close(fd[1]); // 父进程只读,关闭写端
 
   char buffer[100];
 
