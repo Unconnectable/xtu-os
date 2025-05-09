@@ -67,7 +67,7 @@ bool BankerAlgo::isSafe() {
 }
 
 bool BankerAlgo::requestResources(int proce, vector<int> &request) {
-  if (proce < 0) {
+  if (proce < 0 || request.size()!=resource) {
     cerr << "Process num Wrong!";
     return false;
   }

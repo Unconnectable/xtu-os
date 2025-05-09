@@ -2,18 +2,6 @@
 
 > ## **以下代码如果都是忽略各种错误的,基于健壮性的带有检查错误的我会以附录给出**
 
-## 编译命令
-
-> 自己换`gcc`
-
-```bash
-clang create.c -o create
-clang control.c -o control
-clang signal.c -o signal
-clang pipe.c -o pipe
-clang test.c -o test
-```
-
 ## (1)
 
 `fork()`来自`<unistd.h>`头文件
