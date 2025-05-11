@@ -40,6 +40,7 @@ make -j$(nproc)
 cd build
 ./test/banker_test
 ./test/MemoryAlloc_test
+./testPageReplacer_test 
 ```
 
 > ⚠️ 注意:部分测试用例可能被标记为 DISABLED\_,请在对应 .cpp 文件中移除前缀以启用它们.
@@ -54,6 +55,5 @@ cd build
 - 🐞 修复发现的 bug(如内存泄漏、逻辑错误)
 - 💡 提交新的实验实现(如文件系统、调度算法等)
 - 📝 编写更详细的实验报告或补充注释说明
-- ❤️ 致谢
 
 感谢你的关注与贡献！

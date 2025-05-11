@@ -1,0 +1,1 @@
+add_library(PageReplacer STATIC PageReplacer.cpp)
