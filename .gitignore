@@ -17,17 +17,19 @@ cmake-build-*
 # 忽略常见的临时编译输出
 a.out
 *.out
-*.o
+*.os
 *.obj
 *.exe
 
+#忽略 pdf
 reports/*.pdf
-/reports/lab1/lab1.md
-/reports/lab2/lab2.md
-/reports/lab2/lab3.md
-/reports/lab4/lab4.md
 
-**/.vscode/
-.vscode/
+
+# 忽略根目录下的 .vscode 文件夹
+/.vscode/
+
+# 忽略 reports 下所有 labN/labN.md
+/reports/lab[1-4]/lab[1-4].md
+
 # 忽略 Windows 浏览器下载产生的附加信息文件（可选）
 *.md:Zone.Identifier
